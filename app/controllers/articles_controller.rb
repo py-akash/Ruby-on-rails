@@ -19,7 +19,7 @@ before_action :set_article, only: [:edit, :update, :show, :destroy]
     #render plain: params[:article].inspect
     @article = Article.new(article_params)
     if @article.save
-         flash[:notice] = "Article was sucessfully created"
+         flash[:success] = "Article was sucessfully created"
           redirect_to article_path(@article)
     else
       render 'new'
@@ -29,7 +29,7 @@ before_action :set_article, only: [:edit, :update, :show, :destroy]
   def update
    # @article = Article.find(params[:id])
     if @article.update(article_params)
-         flash[:notice] = "Article was sucessfully update"
+         flash[:success] = "Article was sucessfully update"
           redirect_to article_path(@article)
     else
      render 'edit'
@@ -43,7 +43,7 @@ before_action :set_article, only: [:edit, :update, :show, :destroy]
   def destroy
    # @article = Article.find(params[:id])
     @article.destroy
-    flash[:notice] = "Article sucessfully Deleted"
+    flash[:danger] = "Article sucessfully Deleted"
     redirect_to articles_path
   end
 
