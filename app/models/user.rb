@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+    has_many :articles # this line creates after creating add_user_id_to_article
+    before_save {self.email = email.downcase} # this line creates after creating add_user_id_to_article
 	validates :username, presence: true, 
 	uniqueness: { case_sensitive: false }, 
 	length: {minimum: 3, maximum: 25}
