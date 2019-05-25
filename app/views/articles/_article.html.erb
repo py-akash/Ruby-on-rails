@@ -1,9 +1,4 @@
-<h1 align="center">Listing all article</h1>
-
-<%= render 'article', obj: @articles %>
-
-<!--   
-<% @article.each do |article| %>
+<% obj.each do |article| %>
   <div class="row">
     <div class="col-xs-8 col-xs-offset-2">
       <div class="well well-lg">
@@ -15,7 +10,7 @@
            <div class= "aericle-meta-details">
             <small>
               Created by: <%= article.user.username if article.user %>,
-              if article.user this line is temporary beacuse we have the data without user id
+              <!-- if article.user this line is temporary beacuse we have the data without user id-->
               <%=  time_ago_in_words(article.created_at) %> ago,
               Last Update: <%=  time_ago_in_words(article.updated_at) %> ago
             </small>
@@ -31,4 +26,3 @@
     </div>
   </div>
 <% end %>
--->
