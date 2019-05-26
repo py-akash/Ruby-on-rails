@@ -29,7 +29,9 @@
 
 
 <div class="article-actions">
-	<% if logged_in? && current_user == @article.user %> <!--user-19 -->
+	
+	   <!--user-20 below line for admin user after creation -->
+	   <% if logged_in? && (current_user == @article.user || current_user.admin?) %>
                <%= link_to 'Edit this article', edit_article_path(@article), class: "btn btn-x btn-primary" %>
                <%= link_to 'Delete this article', article_path(@article), method: :delete,
                                            data: {confirm: "Are you sure?"},

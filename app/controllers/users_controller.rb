@@ -1,7 +1,8 @@
 class UsersController < ApplicationController
 
   before_action :set_user, only: [:edit, :update, :show] #after creating user 19
-  before_action :require_same_user, only: [:edit, :update]  #user 20 
+  before_action :require_same_user, only: [:edit, :update, :destroy]  #user 20 and user-22
+  before_action :require_admin , only: [:destroy]  #user-22
     def index
     	@user = User.paginate(page: params[:page], per_page: 4)
     end
@@ -43,6 +44,14 @@ class UsersController < ApplicationController
 	  # @user =User.find(params[:id])  after creating user
    @user_articles = @user.articles.paginate(page: params[:page], per_page: 3)
     end
+      
+      # add this destroy line of code in user-22
+    def destroy
+          @user = User.find(params[:id])
+          @user.destroy
+          flash[:danger] = "User and all articles created by user have been deleted"
+          redirect_to users_path
+    end
 
 
 	private
@@ -57,11 +66,20 @@ class UsersController < ApplicationController
  
  #user 20 from here
     def require_same_user
-    	if current_user != @user
+    	if current_user != @user and !current_user.admin?
     		flash[:danger] = "you can only edit or delete your own article"
              redirect_to root_path
          end
     end
     #user 20 here
+
+    #user-22
+    def require_admin
+      if logged_in? and !current_user.admin?
+        flash[:danger] = "only admin users can perform that action"
+        redirect_to root_path
+    end
+    end
+    #user-22
 end
 
