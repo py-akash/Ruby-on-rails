@@ -21,7 +21,8 @@ before_action :require_same_user, only: [:edit, :update, :destroy]  #user 20
     #render plain: params[:article].inspect
     debugger
     @article = Article.new(article_params)
-    @article.user = User.first
+    #@article.user = User.first
+    @article.user = current_user #user 20 from here
     if @article.save
          flash[:success] = "Article was sucessfully created"
           redirect_to article_path(@article)
@@ -59,8 +60,9 @@ before_action :require_same_user, only: [:edit, :update, :destroy]  #user 20
   def article_params
     params.require(:article).permit(:title, :description)
   end
-
-  def require_same_user                   #user 20 from here
+   
+   #user 20 from here
+  def require_same_user                   
       if current_user != @article.user
         flash[:danger] = "you can only edit or delete your own article"
         redirect_to root_path
