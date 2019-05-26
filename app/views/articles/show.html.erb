@@ -29,10 +29,12 @@
 
 
 <div class="article-actions">
-<%= link_to 'Edit this article', edit_article_path(@article), class: "btn btn-x btn-primary" %>
-<%= link_to 'Delete this article', article_path(@article), method: :delete,
+	<% if logged_in? && current_user == @article.user %> <!--user-19 -->
+               <%= link_to 'Edit this article', edit_article_path(@article), class: "btn btn-x btn-primary" %>
+               <%= link_to 'Delete this article', article_path(@article), method: :delete,
                                            data: {confirm: "Are you sure?"},
                                            class: "btn btn-x btn-danger" %>
+    <% end %>    <!--user-19 -->
 <%= link_to 'View All Article', articles_path, class: "btn btn-x btn-success" %>
 </div>
 </div>
