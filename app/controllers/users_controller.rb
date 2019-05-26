@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
   before_action :set_user, only: [:edit, :update, :show] #after creating user 19
-  before_action :require_same_user, only: [:edit, :update]  #user 20 from
+  before_action :require_same_user, only: [:edit, :update]  #user 20 
     def index
     	@user = User.paginate(page: params[:page], per_page: 4)
     end
@@ -14,7 +14,7 @@ class UsersController < ApplicationController
       @user = User.new(user_params)
 
       if @user.save
-      	flash[:sucess] = "welcome to the Beta blog #{@user.username}"
+      	flash[:success] = "welcome to the Beta blog #{@user.username}"
       	redirect_to articles_path
       else
       	render 'new'
@@ -29,7 +29,7 @@ class UsersController < ApplicationController
 	def update
 		#@user = User.find(params[:id])   after creating user
 		if @user.update(user_params)
-          flash[:sucess] = "your account updated sucessfully"
+          flash[:success] = "your account updated sucessfully"
           redirect_to articles_path
 
 		else
